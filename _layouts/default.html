@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'id' }}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% if page.title and page.title != "" %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}" />
+  <meta name="author" content="{{ site.title }}" />
+  <meta name="theme-color" content="#0d1b2a" />
+  <link rel="canonical" href="{{ page.url | absolute_url }}" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="{{ site.title }}" />
+  <meta property="og:title" content="{% if page.title and page.title != "" %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}" />
+  <meta property="og:description" content="{{ page.description | default: site.description }}" />
+  <meta property="og:url" content="{{ page.url | absolute_url }}" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon (inline SVG monogram) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1b2a'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='28' font-weight='700' fill='%23c6a15b' text-anchor='middle'%3EBB%3C/text%3E%3C/svg%3E" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": {{ site.title | jsonify }},
+    "url": {{ site.url | append: '/' | jsonify }},
+    "description": {{ site.description | jsonify }},
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bandung",
+      "addressRegion": "Jawa Barat",
+      "addressCountry": "ID"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="{{ '/' | relative_url }}#top" aria-label="{{ site.title }}">
+        <span class="brand-mark">BB</span>
+        <span class="brand-text">
+          <strong>Babybelanja</strong>
+          <small>{{ site.title }}</small>
+        </span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#tentang">Tentang</a>
+        <a href="#visi">Visi &amp; Misi</a>
+        <a href="#nilai">Nilai</a>
+        <a href="#bisnis">Unit Bisnis</a>
+        <a class="btn btn-gold" href="#kontak">Hubungi Kami</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    {{ content }}
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <a class="foot-brand" href="{{ '/' | relative_url }}#top">
+          <span class="brand-mark">BB</span>
+          <span class="brand-text"><strong>{{ site.title }}</strong><small>Holding Group</small></span>
+        </a>
+        <nav class="foot-links">
+          <a href="#tentang">Tentang</a>
+          <a href="#visi">Visi &amp; Misi</a>
+          <a href="#bisnis">Unit Bisnis</a>
+          <a href="#kontak">Kontak</a>
+        </nav>
+      </div>
+      <div class="foot-bottom">
+        &copy; <span id="year"></span> {{ site.title }}. Seluruh hak cipta dilindungi.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    var toggle = document.getElementById('navToggle');
+    var links = document.getElementById('navLinks');
+    toggle.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    links.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') { links.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); }
+    });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  </script>
+</body>
+</html>

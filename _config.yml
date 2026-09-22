@@ -1,1 +1,9 @@
-theme: jekyll-theme-tactile
+title: PT Babybelanja Berkah Bersama
+description: Perusahaan induk (holding) yang menaungi dan mengembangkan merek-merek ritel keluarga di Indonesia.
+url: https://babybelanja.com
+lang: id
+
+exclude:
+  - README.md
+  - opencode.json
+  - .gitignore

@@ -1,37 +1,39 @@
-## Welcome to GitHub Pages
+# PT Babybelanja Berkah Bersama — Company Profile
 
-You can use the [editor on GitHub](https://github.com/babybelanja/babybelanja.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Situs profil perusahaan (holding group) untuk **PT Babybelanja Berkah Bersama**.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+- Domain: https://babybelanja.com
+- Dibangun dengan **Jekyll 4.4.1**
+- Deploy: **GitHub Actions** (`.github/workflows/pages.yml`) — build & deploy otomatis setiap push ke `master`
 
-### Markdown
+## Struktur
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```
+_config.yml              # konfigurasi situs (title, description, url)
+_layouts/default.html    # layout utama (head, header, konten, footer)
+index.html               # halaman utama (front matter + konten)
+404.html                 # halaman tidak ditemukan
+assets/css/style.css     # stylesheet
+CNAME                    # domain kustom (babybelanja.com)
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Menjalankan secara lokal
 
-### Jekyll Themes
+```sh
+bundle install
+bundle exec jekyll serve
+# buka http://127.0.0.1:4000
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/babybelanja/babybelanja.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## Deploy
 
-### Support or Contact
+Push ke branch `master` akan memicu workflow GitHub Actions untuk build dengan
+Jekyll 4.4.1 dan menerbitkan situs ke GitHub Pages.
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+> Pages **Source** harus disetel ke **GitHub Actions** di
+> Settings → Pages → Build and deployment.
+
+## Catatan
+
+- `opencode.json` bersifat lokal dan tidak diikutsertakan ke repositori (lihat `.gitignore`).
+- `Gemfile.lock` di-commit agar build Actions reprodusibel.
